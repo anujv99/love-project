@@ -10,6 +10,7 @@ const geistSans = Geist({
 
 const geistMono = DM_Mono({
   weight: ["300", "400", "500"],
+  subsets: ["latin"],
 });
 
 export const metadata: Metadata = {
