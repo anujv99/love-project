@@ -35,6 +35,8 @@ export default function Home() {
 
   const [message, setMessage] = useState("");
   const [time, setTime] = useState("");
+  const [show, setShow] = useState(false);
+  const [done, setDone] = useState(false);
 
   useInterval(() => {
     const now = moment();
@@ -121,6 +123,7 @@ export default function Home() {
       const timer = setInterval(() => {
         if (progress.l >= parsedLines.length) {
           clearInterval(timer);
+          setDone(true);
           return;
         }
 
@@ -136,11 +139,18 @@ export default function Home() {
         curr = `<span class="${l.type === "code" ? "text-teal-300 italic" : "text-rose-200"}">${l.text.slice(0, progress.t)}</span>`;
         setMessage(`${cache}<br />${curr}`);
         progress.t += 1;
-      }, 100);
+      }, 50);
     }
 
-    startHeartAnimation();
-    startTextAnimation();
+    setTimeout(() => {
+      startHeartAnimation();
+    }, 1000);
+    setTimeout(() => {
+      startTextAnimation();
+    }, 2000);
+    setTimeout(() => {
+      setShow(true);
+    }, 3000);
   }, [parentWidth]);
 
   const scale = Math.min(parentWidth / 670, 1.0);
@@ -166,13 +176,14 @@ export default function Home() {
           }}
         >
           <div
-            className="absolute inset-0 flex flex-col items-center justify-between pt-42 pb-54"
+            className="absolute inset-0 flex flex-col items-center justify-between pt-42 pb-54 transition-opacity duration-500 ease-in"
             style={{
               scale,
+              opacity: show ? 1 : 0,
             }}
           >
             <p className="text-4xl text-center flex flex-col">
-              आकांक्षा- अनुज FOREVER
+              आकांक्षा - अनुज FOREVER
               <span className="text-xl mt-4">{time}</span>
             </p>
             <p className="text-2xl text-right">
@@ -191,12 +202,22 @@ export default function Home() {
           />
         </div>
       </div>
-      <p
-        className="whitespace-pre font-mono text-xs"
-        dangerouslySetInnerHTML={{
-          __html: message,
-        }}
-      />
+      <div className="flex flex-col items-start">
+        <p
+          className="whitespace-pre font-mono text-xs"
+          dangerouslySetInnerHTML={{
+            __html: message,
+          }}
+        />
+        <a
+          className="whitespace-pre font-mono text-4xl text-left mt-4 transition-opacity duration-500 ease-in"
+          style={{
+            opacity: done ? 1 : 1,
+          }}
+        >
+          ❤️
+        </a>
+      </div>
     </div>
   );
 }
