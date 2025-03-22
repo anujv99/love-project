@@ -20,7 +20,7 @@
 }
 
 body {
-  background: var(--background);
+  @apply bg-stone-800;
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
 }

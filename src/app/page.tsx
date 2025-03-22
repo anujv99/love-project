@@ -1,103 +1,202 @@
-import Image from "next/image";
+"use client";
+
+import { useEffect, useRef, useState } from "react";
+import { useInterval, useMeasure } from "react-use";
+import moment from "moment";
+
+import Garden from "../lib/garden";
+import parsedLines from "../lib/message";
+
+function getHeartPoint(angle: number, offsetX: number, offsetY: number) {
+  const t = angle / Math.PI;
+  const x = 19.5 * (16 * Math.pow(Math.sin(t), 3));
+  const y =
+    -20 *
+    (13 * Math.cos(t) -
+      5 * Math.cos(2 * t) -
+      2 * Math.cos(3 * t) -
+      Math.cos(4 * t));
+  return new Array(offsetX + x, offsetY + y);
+}
+
+const together = new Date();
+together.setFullYear(2025, 1, 14);
+together.setHours(14);
+together.setMinutes(7);
+together.setSeconds(0);
+together.setMilliseconds(0);
 
 export default function Home() {
-  return (
-    <div className="grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="list-inside list-decimal text-sm/6 text-center sm:text-left font-[family-name:var(--font-geist-mono)]">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] px-1 py-0.5 rounded font-[family-name:var(--font-geist-mono)] font-semibold">
-              src/app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const heartRef = useRef<HTMLDivElement>(null);
+  const gardenRef = useRef<HTMLCanvasElement>(null);
+  const startedRef = useRef(false);
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const [parentRef, { width: parentWidth }] = useMeasure<HTMLDivElement>();
+
+  const [message, setMessage] = useState("");
+  const [time, setTime] = useState("");
+
+  useInterval(() => {
+    const now = moment();
+    const diff = moment.duration(now.diff(together));
+    const days = Math.floor(diff.asDays());
+    const hours = diff.hours();
+    const minutes = diff.minutes();
+    const seconds = diff.seconds();
+
+    setTime(
+      days +
+        " days " +
+        (hours < 10 ? "0" + hours : hours) +
+        " hours " +
+        (minutes < 10 ? "0" + minutes : minutes) +
+        " minutes " +
+        (seconds < 10 ? "0" + seconds : seconds) +
+        " seconds",
+    );
+  }, 1000);
+
+  useEffect(() => {
+    if (
+      !heartRef.current ||
+      !gardenRef.current ||
+      !parentWidth ||
+      startedRef.current
+    )
+      return;
+    startedRef.current = true;
+
+    const { width, height } = heartRef.current.getBoundingClientRect();
+    gardenRef.current.width = width;
+    gardenRef.current.height = height;
+
+    const gardenCtx = gardenRef.current.getContext("2d");
+    if (!gardenCtx) return;
+
+    gardenCtx.globalCompositeOperation = "lighter";
+    const garden = new Garden(gardenCtx, gardenRef.current);
+
+    setInterval(() => {
+      garden.render();
+    }, garden.options.growSpeed);
+
+    function startHeartAnimation() {
+      const interval = 50;
+      let angle = 10;
+      const heart = new Array();
+      const animationTimer = setInterval(function () {
+        const bloom = getHeartPoint(angle, width / 2, height / 2 - 55);
+        let draw = true;
+        for (let i = 0; i < heart.length; i++) {
+          const p = heart[i];
+          const distance = Math.sqrt(
+            Math.pow(p[0] - bloom[0], 2) + Math.pow(p[1] - bloom[1], 2),
+          );
+          if (distance < garden.options.bloomRadius.max * 1.3) {
+            draw = false;
+            break;
+          }
+        }
+        if (draw) {
+          heart.push(bloom);
+          garden.createRandomBloom(bloom[0], bloom[1]);
+        }
+        if (angle >= 30) {
+          clearInterval(animationTimer);
+          // showMessages();
+        } else {
+          angle += 0.2;
+        }
+      }, interval);
+    }
+
+    const progress = {
+      l: 0,
+      t: 0,
+    };
+    let cache = "";
+    let curr = "";
+
+    function startTextAnimation() {
+      const timer = setInterval(() => {
+        if (progress.l >= parsedLines.length) {
+          clearInterval(timer);
+          return;
+        }
+
+        const l = parsedLines[progress.l];
+        if (progress.t - 1 === l.text.length) {
+          progress.l += 1;
+          progress.t = 0;
+          if (curr) cache = cache ? `${cache}<br>${curr}` : curr;
+          curr = "";
+          return;
+        }
+
+        curr = `<span class="${l.type === "code" ? "text-teal-300 italic" : "text-rose-200"}">${l.text.slice(0, progress.t)}</span>`;
+        setMessage(`${cache}<br />${curr}`);
+        progress.t += 1;
+      }, 100);
+    }
+
+    startHeartAnimation();
+    startTextAnimation();
+  }, [parentWidth]);
+
+  const scale = Math.min(parentWidth / 670, 1.0);
+
+  return (
+    <div
+      ref={parentRef}
+      className="w-screen bg-stone-800 flex flex-col items-center gap-12 py-12"
+    >
+      <div
+        className="w-full overflow-hidden relative"
+        style={{
+          minHeight: 625 * scale,
+          maxHeight: 625 * scale,
+        }}
+      >
+        <div
+          ref={heartRef}
+          className="absolute left-1/2 -translate-x-1/2 top-1/2 -translate-y-1/2"
+          style={{
+            width: 670,
+            height: 625,
+          }}
+        >
+          <div
+            className="absolute inset-0 flex flex-col items-center justify-between pt-42 pb-54"
+            style={{
+              scale,
+            }}
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Read our docs
-          </a>
+            <p className="text-4xl text-center flex flex-col">
+              आकांक्षा- अनुज FOREVER
+              <span className="text-xl mt-4">{time}</span>
+            </p>
+            <p className="text-2xl text-right">
+              I LOVE YOU SO MUCH
+              <br />- ANUJ
+            </p>
+          </div>
+          <canvas
+            ref={gardenRef}
+            className="w-full h-full"
+            style={{
+              width: 670,
+              height: 625,
+              scale,
+            }}
+          />
         </div>
-      </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
+      </div>
+      <p
+        className="whitespace-pre font-mono text-xs"
+        dangerouslySetInnerHTML={{
+          __html: message,
+        }}
+      />
     </div>
   );
 }
