@@ -19,7 +19,7 @@ As the time went on;
 The Bond grew stronger and stronger;
 Journey from Infatuation to Love;
 We have traveled a long way together;
-There have been fights;
+There have been difficult times;
 /* and i'm sure there will be more. */
 But our Bond will always grow back Stronger;
 
@@ -28,7 +28,7 @@ All I want to say is:
 Baby, I will love you forever;
 
 
-Now If you want to hug me,
+Now If you want to hear me,
 you can touch the heart below
 `;
 

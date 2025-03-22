@@ -210,9 +210,12 @@ export default function Home() {
           }}
         />
         <a
+          href="/music/photograph.mp3"
+          target="_blank"
+          rel="noopener noreferrer"
           className="whitespace-pre font-mono text-4xl text-left mt-4 transition-opacity duration-500 ease-in"
           style={{
-            opacity: done ? 1 : 1,
+            opacity: done ? 1 : 0,
           }}
         >
           ❤️
