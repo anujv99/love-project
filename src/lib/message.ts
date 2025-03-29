@@ -3,7 +3,7 @@ type Line = {
   text: string;
 };
 
-const loveMessage = `
+const a = `
 /*
  * the code of love
  */
@@ -32,18 +32,24 @@ Now If you want to hear me,
 you can touch the heart below
 `;
 
-let type: Line["type"] = "text";
+function parseMessage(message: string) {
+  let type: Line["type"] = "text";
 
-const lines = loveMessage.split("\n").slice(1, -1);
-const parsedLines: Line[] = [];
+  const lines = message.split("\n").slice(1, -1);
+  const parsedLines: Line[] = [];
 
-lines.forEach((l) => {
-  if (l.includes("/*")) type = "code";
-  parsedLines.push({
-    type,
-    text: l,
+  lines.forEach((l) => {
+    if (l.includes("/*")) type = "code";
+    parsedLines.push({
+      type,
+      text: l,
+    });
+    if (l.includes("*/")) type = "text";
   });
-  if (l.includes("*/")) type = "text";
-});
 
-export default parsedLines;
+  return parsedLines;
+}
+
+const loveMessage = parseMessage(a);
+
+export { loveMessage };

@@ -5,7 +5,7 @@ import { useInterval, useMeasure } from "react-use";
 import moment from "moment";
 
 import Garden from "../lib/garden";
-import parsedLines from "../lib/message";
+import { loveMessage } from "../lib/message";
 import { getPublicPath } from "../lib/utils";
 
 function getHeartPoint(angle: number, offsetX: number, offsetY: number) {
@@ -122,13 +122,13 @@ export default function Home() {
 
     function startTextAnimation() {
       const timer = setInterval(() => {
-        if (progress.l >= parsedLines.length) {
+        if (progress.l >= loveMessage.length) {
           clearInterval(timer);
           setDone(true);
           return;
         }
 
-        const l = parsedLines[progress.l];
+        const l = loveMessage[progress.l];
         if (progress.t - 1 === l.text.length) {
           progress.l += 1;
           progress.t = 0;
