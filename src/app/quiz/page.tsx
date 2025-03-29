@@ -103,7 +103,7 @@ const shapes = [
 ];
 
 export default function QuizPage() {
-  const [questionIdx, setQuestionIdx] = useState(3);
+  const [questionIdx, setQuestionIdx] = useState(0);
   const [optionIdx, setOptionIdx] = useState(-1);
   const [showCommon, setShowCommon] = useState(false);
   const [pass, setPass] = useState("");
