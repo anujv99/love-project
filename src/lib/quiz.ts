@@ -54,7 +54,7 @@ const questions = [
       },
       {
         text: "Sunflower",
-        response: `lose but not the correct answer 🙃, this was the second song I sent you, when you said you liked "Eastside" then I sent you this. After I sent Sunflower, you sent your version of Sunflower, which was so good, I still remeber that I was in the bus when I listened to it.`,
+        response: `Close but not the correct answer 🙃, this was the second song I sent you, when you said you liked "Eastside" then I sent you this. After I sent Sunflower, you sent your version of Sunflower, which was so good, I still remeber that I was in the bus when I listened to it.`,
       },
     ],
     commonVideo: "/music/q3.mp4",
