@@ -78,7 +78,7 @@ const questions = [
       },
     ],
     commonMessage:
-      "Now you'll have to call me to get the password for next question, that will be the last question, I will be asleep by the time you reach this point, so you can call me tomorrow and I'll tell you the password, till then you can listen to this song, I didn't sing it quite well, but it is for you since I'm yours. I LOVE YOU MORE THAN ANYTHYING ELSE IN THIS WORLD, I LOVE YOU MORE THAN MY LIFE AND I WILL LOVE YOU FOREVER Moni Ji, MY POAT, MY WIFE, MY EVERYTHING.....",
+      "Now you'll have to call me to get the password for next question, that will be the last question, I will be asleep by the time you reach this point, so you can call me whenever you feel comfortable and I'll tell you the password (please don't force yourself to call, even if you don't want to call I will tell you in chat, I don't want you to do anything you're not comfortable with), till then you can listen to this song, I didn't sing it quite well, but it is for you since I'm yours. I LOVE YOU MORE THAN ANYTHYING ELSE IN THIS WORLD, I LOVE YOU MORE THAN MY LIFE AND I WILL LOVE YOU FOREVER Moni Ji, MY POAT, MY WIFE, MY EVERYTHING.....",
     password: "idontknow123",
   },
 ];
