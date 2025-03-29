@@ -6,6 +6,7 @@ import moment from "moment";
 
 import Garden from "../lib/garden";
 import parsedLines from "../lib/message";
+import { getPublicPath } from "../lib/utils";
 
 function getHeartPoint(angle: number, offsetX: number, offsetY: number) {
   const t = angle / Math.PI;
@@ -210,7 +211,7 @@ export default function Home() {
           }}
         />
         <a
-          href="/love-project/music/photograph.mp3"
+          href={getPublicPath("/music/photograph.mp3")}
           target="_blank"
           rel="noopener noreferrer"
           className="whitespace-pre font-mono text-4xl text-left mt-4 transition-opacity duration-500 ease-in"
