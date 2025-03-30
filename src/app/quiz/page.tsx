@@ -287,7 +287,7 @@ export default function QuizPage() {
               </div>
             </div>
           </Card>
-          {questionIdx !== 4 && (
+          {questionIdx !== 3 && (
             <Card className="w-full">
               <div className="flex flex-col w-full">
                 <Button
@@ -295,9 +295,9 @@ export default function QuizPage() {
                   className="w-full"
                   variant="soft"
                   color={getRandomColor()}
-                  onClick={() => setQuestionIdx(4)}
+                  onClick={() => setQuestionIdx(3)}
                 >
-                  Skip to question 5
+                  Skip to question 4
                 </Button>
               </div>
             </Card>
