@@ -73,13 +73,46 @@ const questions = [
           "Mrs. Moni, I know you're a goldfish, but you should know that I have asked you 😑, I'm mad at you. I asked you first on the night when you were going to your papa's friend's wedding, I asked you that night before you reached the wedding, you were in the car and you sent me some photos, I got very emotional and asked you to marry me.",
       },
       {
-        text: "I don't think you have asked yetjmk",
+        text: "I don't think you have asked yet",
         response: `Well, I have no words for you Mrs. Fine, have it your way, I haven't asked you to marry me, but I will, I will get you a ring, and I will ask you to marry me when we meet one day, I'll kneel down on my knee and propose you like everyone should, you're the love of my life and I won't marry anyone else other than you.`,
       },
     ],
     commonMessage:
       "Now you'll have to call me to get the password for next question, that will be the last question, I will be asleep by the time you reach this point, so you can call me whenever you feel comfortable and I'll tell you the password (please don't force yourself to call, even if you don't want to call I will tell you in chat, I don't want you to do anything you're not comfortable with), till then you can listen to this song, I didn't sing it quite well, but it is for you since I'm yours. I LOVE YOU MORE THAN ANYTHYING ELSE IN THIS WORLD, I LOVE YOU MORE THAN MY LIFE AND I WILL LOVE YOU FOREVER Moni Ji, MY POAT, MY WIFE, MY EVERYTHING.....",
-    password: "idontknow123",
+    password: "iloveyou",
+  },
+  {
+    question: "Why do you think I love you?",
+    options: [
+      {
+        text: "Because My Goldfish is POAT",
+        response:
+          "I love you My Goldfish... you look like the full moon in a clear night sky, there are billions of stars but only one thing looks the best and that's you. I love how pretty you are, I love how beautiful you are and I love how adorable you are. Every time I see you I can't help but want to hug you, to hold you close to me and to kiss you. Your eyes hold the entire universe in them, I can keep looking into them for the rest of my life and never get tired of them, they are so big and deep and pretty. And your smile, I have no words for your smile, your smile has the power to pierce my heart and remove any worry, pain or suffering that I have. You keep saying that you are below average and don't look good, but try to see it from my eyes and you'll know how gorgeous you are, there is nothing better in this world my darling, you are the best.",
+      },
+      {
+        text: "Because Moni Ji has the best voice",
+        response:
+          "Yes Moni Ji, yes... you have the best voice in this entire world, your voice is like the sound of raindrops dripping in grass on a rainy night, so soothing and calming, it's so sweet that every time I hear you, I can taste the sound of your voice. You have a magical voice that I haven't heard anytime before, when you sing for me I can't stop smiling, I never in my life thought that someone would sing for me, every time I hear your voice my heart fills with so many emotions that I can't explain, it feels like it will explode from all the emotions, I can't stop loving your voice. I love your voice and I love you for gifting with your wonderful voice, I could hear you all day, you have the best voice.",
+      },
+      {
+        text: "Because Mrs. Wife love me for who I am",
+        response:
+          "Thank you Mrs. Wife... I never in my life thought that anyone would love me, I am not that great, I'm fat, ugly, sound like a horse, I have blood pressure, I have anxiety issues, I have self doubt issues, I have so many problems, I always thought that no one would love me, why would someone compromise so much for me when I have nothing to give in return, why would someone settle for me when she can find someone with none of these issues, someone normal. But you changed that, you love me despite knowing all of me, and I love you for that. I can be what I am around you, I can do what I want around you, you made me feel safe and accepted me however I am, I know I'm not perfect, I'm so far from perfect, but despite that you love me, I have tears in my eyes as I'm writing this, I cannot tell you how much it means to me, I will give you the entire world because you have loved me, because you showed me that there is someone in this world who loves me, because you gave me the ability to love you, it's a wonderful feeling and I never want to lose you.",
+      },
+      {
+        text: "Because Akanksha has a good heart",
+        response:
+          "You have a beautiful name Akanksha... and you have a beautiful heart, I love that you care about the people around you, I love that you care about animals, I love that you treat people equally, I love that you have been so patient with me. In your heart I found safety and comfort, I don't feel afraid to talk to you, I don't feel like I have to change myself to be with you, I told you all my problems and you accepted them all, I have never found someone like you who is so caring, loving and understanding. You are not money minded, you don't put much value in materialistic things, you care more about love and these are the qualities that I adore in you. You have a beautiful heart Moni Ji, I have met a lot of people in my life, but I have never found someone with such a big heart as yours, you have a BOAT heart and I love you for that.",
+      },
+      {
+        text: "Because I have no reason",
+        response:
+          "My Ardhangini... I can tell you endless things that I love in you, I love you for all the reasons that were listed above, and they are just few of the endless things I love in you, but the truth is that I don't know why I love you so much, I don't know why I sing songs for you, I don't know why I make videos for you, I don't know why I do the things that I once thought were so dumb, but it feels so good to do them for you, for the one person who care about me so much, I can do anything for you my love, and I don't know why I can do them for you, I just love you too much to even put into words, do you know that I don't think very logically, I let my heart drive me because that's what feels right to me, and I do those things because my heart wants to do them for you, my heart wants to be with you and my heart wants to love you like no one else has loved you. I wish I could tell the amount of love I have for you, it's like every single cell, every single atom in by body and every single peice of me is in love with you. I don't know why I love you but I just love you way too much.",
+      },
+    ],
+    commonMessage:
+      "That's all for now my love, hope you liked this quiz, I know it wasn't that great, too much reading involved. I love you so much babe, I want to marry you and spend my entire life loving you and making you happy, happiness that I had forgotten until I met you, before I met you I spent days without smiling, I had no reason. But you came in like a storm and rained so hard on my heart, my heart was like a desert before I met you, there was not a single drop of happiness in it, I just numbed myself with endless work to forget about all my pains, but ever since you rained on me, the place which was once a desert, has now become a field full of trees, full of flowers, full of life and full of love. I can keep going but since time is running out, I'll stop here, there is one last thing after this, it's not a question, it's something different, but you'll have to wait until we meet to get the password. When we meet, I'll give you the password and you can see what's waiting for you, it's nothing special, but it's something I want to do for you. Enjoy this song, I Love You!",
+    password: "idontknowyet",
   },
 ];
 

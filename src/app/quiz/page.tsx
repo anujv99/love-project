@@ -100,6 +100,26 @@ const shapes = [
     width: 625,
     height: 625,
   },
+  {
+    getPoint: (angle: number, offsetX: number, offsetY: number) => {
+      // Normalize angle (10-30) to range 0-2π
+      const t = ((angle - 10) / 20) * (Math.PI * 2);
+
+      // Set radius for the infinity symbol
+      const a = 250; // Width parameter
+      const b = 150; // Height parameter
+
+      // Parametric equations for infinity symbol (lemniscate of Bernoulli)
+      const x = (a * Math.sin(t)) / (1 + Math.cos(t) * Math.cos(t));
+      const y =
+        (b * Math.sin(t) * Math.cos(t)) / (1 + Math.cos(t) * Math.cos(t));
+
+      return new Array(offsetX + x, offsetY + y);
+    },
+    angle: 0.2,
+    width: 625,
+    height: 625,
+  },
 ];
 
 export default function QuizPage() {
@@ -217,6 +237,13 @@ export default function QuizPage() {
                             src={getPublicPath("/music/kalank.mp3")}
                           />
                         )}
+                        {questionIdx === 4 && (
+                          <audio
+                            className="w-full"
+                            controls
+                            src={getPublicPath("/music/jokerqueen.mp3")}
+                          />
+                        )}
                         <Separator size="4" />
                         <Text size="2" color="gray">
                           Enter password for next question 😛
@@ -260,6 +287,21 @@ export default function QuizPage() {
               </div>
             </div>
           </Card>
+          {questionIdx !== 4 && (
+            <Card className="w-full">
+              <div className="flex flex-col w-full">
+                <Button
+                  suppressHydrationWarning
+                  className="w-full"
+                  variant="soft"
+                  color={getRandomColor()}
+                  onClick={() => setQuestionIdx(4)}
+                >
+                  Skip to question 5
+                </Button>
+              </div>
+            </Card>
+          )}
         </div>
       </Box>
     </div>
