@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, DM_Mono } from "next/font/google";
 import "./globals.css";
+import "./animations.css";
 import cx from "../lib/cx";
 
 const geistSans = Geist({
@@ -11,6 +12,7 @@ const geistSans = Geist({
 const geistMono = DM_Mono({
   weight: ["300", "400", "500"],
   subsets: ["latin"],
+  variable: "--font-geist-mono",
 });
 
 export const metadata: Metadata = {
@@ -26,7 +28,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body
-        className={cx("antialiased", geistSans.variable, geistMono.className)}
+        className={cx("antialiased", geistSans.variable, geistMono.variable)}
       >
         {children}
       </body>
